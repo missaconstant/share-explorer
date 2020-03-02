@@ -1,0 +1,114 @@
+.jd-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: all 0.3s ease .3s;
+  z-index: -100; }
+  .jd-box.shown {
+    z-index: 20;
+    transition: none; }
+    .jd-box.shown .jd-overlay {
+      animation: showJDOverlay .2s ease;
+      animation-fill-mode: forwards; }
+    .jd-box.shown .jd-conten-box {
+      animation: showJDBox 0.5s cubic-bezier(0.19, 1, 0.22, 1) 0.2s;
+      animation-fill-mode: forwards; }
+  .jd-box .jd-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 21;
+    animation: hideJDOverlay .3s ease .2s;
+    animation-fill-mode: forwards; }
+  .jd-box .jd-conten-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 22;
+    opacity: 0;
+    box-shadow: 1px 3px 20px rgba(0, 0, 0, 0.3);
+    animation: hideJDBox .3s ease;
+    animation-fill-mode: forwards; }
+    .jd-box .jd-conten-box .jd-content {
+      width: 450px;
+      padding: 30px;
+      background: #fff; }
+      .jd-box .jd-conten-box .jd-content .jd-title {
+        font-size: 2em;
+        font-weight: bold;
+        color: #444; }
+      .jd-box .jd-conten-box .jd-content .jd-message {
+        font-size: 18px;
+        color: #333;
+        margin-top: 15px; }
+      .jd-box .jd-conten-box .jd-content .jd-form .jd-input-group {
+        position: relative;
+        border: 2px solid #444;
+        margin-top: 20px; }
+        .jd-box .jd-conten-box .jd-content .jd-form .jd-input-group input {
+          width: 100%;
+          height: 45px;
+          padding: 0 10px;
+          box-sizing: border-box;
+          border: none;
+          outline: none; }
+      .jd-box .jd-conten-box .jd-content .jd-footer {
+        margin-top: 30px;
+        text-align: right; }
+        .jd-box .jd-conten-box .jd-content .jd-footer button {
+          background: #fff;
+          padding: 15px 20px;
+          border: 2px solid #333;
+          font-size: 14px;
+          font-weight: bold;
+          color: #333;
+          margin-left: 10px;
+          outline: none; }
+          .jd-box .jd-conten-box .jd-content .jd-footer button.jd-confirm-btn {
+            background: #333;
+            color: #fff; }
+
+@keyframes showJDBox {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8); }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); } }
+
+@keyframes hideJDBox {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8); } }
+
+@keyframes showJDOverlay {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@keyframes hideJDOverlay {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+@media screen and (max-width: 576px) {
+  .jd-box .jd-conten-box .jd-content {
+    width: 300px;
+    padding: 20px; }
+    .jd-box .jd-conten-box .jd-content .jd-title {
+      font-size: 1.6em; }
+    .jd-box .jd-conten-box .jd-content .jd-message {
+      font-size: 15px; }
+    .jd-box .jd-conten-box .jd-content .jd-footer button {
+      padding: 10px 15px; } }

@@ -1,0 +1,128 @@
+#!/usr/bin/php
+<?php
+
+	namespace framer;
+
+	if (strtolower(php_sapi_name()) != 'cli') exit();
+
+	/*
+	 * Getting config vars
+	*/
+	include_once 'core/statics.php';
+	include_once 'core/config.php';
+	include_once 'core/consoler.php';
+
+
+	switch ( $argv[1] )
+	{
+		// serve
+
+		case 'serve':
+			if (!isset($argv[2]) || (isset($argv[2]) && $argv[2]=='--dev'))
+			{
+				echo "Now serving on " . Config::$dev_host . ':' . Config::$serve_port . "\n";
+				shell_exec("php -S " . Config::$dev_host . ':' . Config::$serve_port);
+			}
+			else if (isset($argv[2]) && $argv[2]=='--share')
+			{
+				echo "Now serving on " . Config::$share_host . ':' . Config::$serve_port . "\n";
+				shell_exec("php -S " . Config::$share_host . ':' . Config::$serve_port);
+			}
+			break;
+
+
+		// custom serve
+
+		case 'open':
+			if (isset($argv[2]))
+			{
+				$ip = $argv[2];
+				$fd = $argv[3] ?? './';
+
+				if ( is_dir( $fd ) )
+				{
+					// what is going on
+					echo "Folder  ". $fd ." shared !\n";
+
+					// store homedir
+					$configs = json_decode( file_get_contents(__DIR__ . '/share.config.json') );
+					$configs->homedir = $fd;
+
+					file_put_contents(__DIR__ . '/share.config.json', json_encode($configs, JSON_PRETTY_PRINT));
+
+					// launch server
+					shell_exec("php -S " . $ip);
+				}
+				else {
+					echo "Failed:  ". $fd ." could not be shared !\n";
+				}
+			}
+			break;
+
+
+
+		// layout generating
+
+		case 'g:layout':
+			if ( isset($argv[2]) )
+			{
+				// creating content
+				$content =
+					"<?php \n" .
+						"\tnamespace framer; \n\n" .
+						"\t//stamp start \n" .
+						"\tob_start(); \n\n" .
+						"\tinclude __DIR__ . '/../' . \$path . '.vue.php'; \n\n" .
+						"\t// get the content \n" .
+						"\t\$content = ob_get_contents(); \n\n" .
+						"\t// clean stamp content \n\n" .
+						"\tob_end_clean(); \n" .
+					"?> \n\n" .
+					"<!--- wrapper ---> \n\n" .
+					"<?= \$content ?> \n\n" .
+					"<!--- wrapper --->";
+
+				// writing file
+				file_put_contents( __DIR__ . '/vues/layouts/' . $argv[2] . '.layout.php', $content );
+
+				// print result
+				exit( Consoler::colorize("Effectué: Le layout ". $argv[2] ." a bien été généré !\n", 'green') );
+			}
+			else {
+				// print error
+				exit( Consoler::colorize("Erreur: Vous devez specifier un nom pour votre layout.\n", 'red') );
+			}
+			break;
+
+
+		// controller generating
+
+		case 'g:controller':
+			if ( isset($argv[2]) && ! preg_match("#controlleur#i", $argv[2]) )
+			{
+				$content =
+					"<?php \n\n" .
+						"\tnamespace framer; \n\n\n" .
+						"\tclass ". ucfirst($argv[2]) ."Controlleur extends controlleur \n" .
+						"\t{ \n" .
+							"\t\tpublic function __construct() \n" .
+							"\t\t{ \n\n" .
+							"\t\t} \n\n" .
+							"\t\tpublic function index() \n" .
+							"\t\t{ \n" .
+								"\t\t\t\$this->render('view', 'layout', [ \"foo\" => \"bar !\" ]); \n" .
+							"\t\t} \n" .
+						"\t} \n";
+
+				// writing file
+				file_put_contents( __DIR__ . '/controlleurs/' . ucfirst($argv[2]) . 'Controlleur.php', $content );
+
+				// print result
+				exit( Consoler::colorize("Effectué: Le controlleur ". $argv[2] ." a bien été généré !\n", 'green') );
+			}
+			else {
+				// print error
+				exit( Consoler::colorize("Erreur: \n1 - Vous devez specifier un nom pour votre controlleur. \n2 - Le nom ne peut contenir \"controlleur\"\n", 'red') );
+			}
+			break;
+	}

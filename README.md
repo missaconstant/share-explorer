@@ -1,2 +1,6 @@
+<<<<<<< HEAD
+# framer
+Juste for framing
+=======
 # share-explorer
-Share easily your datas in your local network and online
+>>>>>>> e6a7e2c941749c9e9eb9a1c5bb6812ac8f12732d
