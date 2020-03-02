@@ -48,6 +48,7 @@ var app = new Vue({
             // update home dir
             self.path       = configs.homedir;
             self.homedir    = configs.homedir;
+            self.api        = configs.ip_port;
 
             // load path dirs
             self.loadPath( self.path );
@@ -89,7 +90,7 @@ var app = new Vue({
 
     methods: {
         /**
-        * @method loadPath
+        * @method loadConifgs
         * Load a path content
         */
         loadConifgs: function (handle) {
@@ -100,7 +101,7 @@ var app = new Vue({
 
             // query
             $.ajax({
-                url     : self.api + '/get-home-path',
+                url     : 'share.config.json',
                 method  : 'get',
                 dataType: 'json'
             })

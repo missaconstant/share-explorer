@@ -38,6 +38,7 @@
 			{
 				$ip = $argv[2];
 				$fd = $argv[3] ?? './';
+				$pc = $argv[4] ?? '--http';
 
 				if ( is_dir( $fd ) )
 				{
@@ -47,6 +48,7 @@
 					// store homedir
 					$configs = json_decode( file_get_contents(__DIR__ . '/share.config.json') );
 					$configs->homedir = $fd;
+					$configs->ip_port = str_replace('--', '', $pc) .'://'. $ip;
 
 					file_put_contents(__DIR__ . '/share.config.json', json_encode($configs, JSON_PRETTY_PRINT));
 
