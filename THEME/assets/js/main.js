@@ -475,6 +475,9 @@ var app = new Vue({
         */
         handleFileContextMenu: function (e, file) {
             e.preventDefault();
+
+            var el = e.target.nodeName == 'LI' ? e.target : e.target.parentNode;
+                el.querySelector('.dropdown-toggle').click();
         },
 
         /**

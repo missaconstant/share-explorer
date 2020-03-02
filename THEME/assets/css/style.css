@@ -200,7 +200,8 @@ div.main {
               padding: 0 10px;
               color: #999;
               transform: scale(0);
-              transition: all 0.3s ease; }
+              transition: all 0.3s ease;
+              outline: none; }
               div.main .app .main-content .current-dir .files-folders .items .item .filecontextmenu:hover {
                 background: #f1f1f1;
                 border-radius: 3px; }
