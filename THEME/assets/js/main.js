@@ -30,7 +30,8 @@ var app = new Vue({
         settings: {
             searchbar   : { shown: false, value: '' },
             tinysidebar : { shown: false },
-            dropzone    : { shown: false }
+            dropzone    : { shown: false },
+            clipboard   : { todo: null, tomove: [], frompath: '' }
         },
         jprompt : new JDialog(),
         jalert  : new JDialog()
@@ -388,6 +389,67 @@ var app = new Vue({
                 document.body.appendChild(a);
                 a.click();
                 a.parentNode.removeChild(a);
+        },
+
+        /**
+        * @method addClipBoard
+        * ---
+        */
+        addClipBoard: function (files, todo) {
+            var self = this;
+            this.settings.clipboard = { todo: todo, tomove: files, frompath: self.path }
+        },
+
+        /**
+        * @method addClipBoard
+        * ---
+        */
+        pasteFiles: function (destination) {
+            var self = this;
+
+            // the loader
+            seHelp.loader.show("Patientez un instant ...");
+
+            // do query
+            $.ajax({
+                url     : self.api + '/moveorcopy',
+                method  : 'post',
+                data    : {
+                    path: self.path,
+                    dest: self.path +'/'+ (destination || ''),
+                    from: self.settings.clipboard.frompath,
+                    todo: self.settings.clipboard.todo,
+                    list: self.settings.clipboard.tomove
+                },
+                dataType: 'json'
+            })
+            .done(function (response) {
+                if ( ! response.moveorcopy ) {
+                    self.jalert.show({
+                        title: "Erreur",
+                        message: "L'operation a échoué !"
+                    });
+
+                    return;
+                }
+
+                // reinitialize clipboard
+                self.settings.clipboard = {
+                    frompath: '',
+                    todo    : '',
+                    tomove  : []
+                };
+
+                // upate dirs list
+                self.dirs = response.dirs;
+
+                // filter
+                self.filterFile();
+            })
+            .always(function () {
+                // hide loader
+                seHelp.loader.hide();
+            });
         },
 
         /**

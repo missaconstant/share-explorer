@@ -239,6 +239,30 @@
 		}
 
 		/**
+		* @method moveorcopy
+		* @return json
+		*/
+		public function moveorcopy ()
+		{
+			$path = Posts::post('path');
+			$from = Posts::post('from');
+			$dest = Posts::post('dest');
+			$todo = Posts::post('todo');
+			$list = Posts::post('list');
+
+			foreach ( $list as $k => $item )
+			{
+				$todo == 'copy' ? $this->rcopy( $from. '/' .$item, $dest. '/' . $item ) : ( $todo == 'cut' ? $this->rrename( $from. '/' .$item, $dest. '/' .$item ) : '' );
+			}
+
+			return $this->json_success("done", [
+				"path" 		=> $path,
+				"moveorcopy"=>true,
+				"dirs"		=> $this->getPathFiles( $path )
+			]);
+		}
+
+		/**
 		* @method delTree
 		* @author https://www.php.net/manual/fr/function.rmdir.php#110489
 		* @return json
@@ -252,5 +276,39 @@
 			}
 
 			return @rmdir($dir);
+		}
+
+		/**
+		* @method rcopy
+		* @author https://www.php.net/manual/fr/function.copy.php#104020
+		* @return json
+		*/
+		function rcopy($src, $dst) {
+			if (file_exists($dst)) $this->delTree($dst);
+			if (is_dir($src)) {
+				mkdir($dst);
+				$files = scandir($src);
+				foreach ($files as $file)
+					if ($file != "." && $file != "..") $this->rcopy("$src/$file", "$dst/$file");
+			}
+			else if (file_exists($src)) copy($src, $dst);
+		}
+
+		/**
+		* @method rrename
+		* @about inspired by rcopy from https://www.php.net/manual/fr/function.copy.php#104020
+		* @return json
+		*/
+		function rrename($src, $dst) {
+			if (file_exists($dst)) $this->delTree($dst);
+			if (is_dir($src)) {
+				mkdir($dst);
+				$files = scandir($src);
+				foreach ($files as $file)
+					if ($file != "." && $file != "..") $this->rrename("$src/$file", "$dst/$file");
+
+				$this->delTree( $src );
+			}
+			else if (file_exists($src)) rename($src, $dst);
 		}
 	}

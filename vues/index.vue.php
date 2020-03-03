@@ -124,8 +124,9 @@
                                     <!--  -->
 
                                     <div class="dropdown-menu" aria-labelledby="dropfilecontext">
-                                        <!-- <a class="dropdown-item" href="#"><i class="icon ion-md-clipboard"></i> Copier</a>
-                                        <a class="dropdown-item" href="#"><i class="icon ion-md-cut"></i> Couper</a> -->
+                                        <a class="dropdown-item" href="#" @click="addClipBoard([item.filename], 'copy')"><i class="icon ion-md-copy"></i> Copier</a>
+                                        <a class="dropdown-item" href="#" @click="addClipBoard([item.filename], 'cut')"><i class="icon ion-md-cut"></i> Couper</a>
+                                        <a class="dropdown-item" href="#" @click="pasteFiles(item.filename)" v-if="settings.clipboard.tomove.length && !item.isfile"><i class="icon ion-md-clipboard"></i> Coller</a>
                                         <a class="dropdown-item" href="#" @click="renameFile(item)"><i class="icon ion-md-create"></i> Renommer</a>
                                         <a class="dropdown-item" href="#" @click="deleteFile(item)"><i class="icon ion-md-trash"></i> Supprimer</a>
                                         <div class="dropdown-divider" v-if="item.isfile"></div>
