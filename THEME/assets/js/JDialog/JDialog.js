@@ -159,7 +159,7 @@ JDialog.prototype.show = function (options) {
     this.element.style.zIndex = JDialog._nextZindex;
 
     // focus on the first input if text type
-    if ( this.options.inputs.length && ['text', 'email', 'password'].indexOf( this.options.inputs[0].type ) ) {
+    if ( this.options.inputs.length && ['text', 'email', 'password'].indexOf( this.options.inputs[0].type ) != -1 ) {
         this.element.querySelector('.jd-form input[name="'+ this.options.inputs[0].name +'"]').focus();
     }
 

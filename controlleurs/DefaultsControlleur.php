@@ -25,7 +25,8 @@
 
 		public function go()
 		{
-			phpinfo();
+			// phpinfo();
+			echo $_SERVER['REMOTE_ADDR'];
 		}
 
 		/**
@@ -242,7 +243,7 @@
 		* @method moveorcopy
 		* @return json
 		*/
-		public function moveorcopy ()
+		public function moveorcopy()
 		{
 			$path = Posts::post('path');
 			$from = Posts::post('from');
@@ -252,14 +253,27 @@
 
 			foreach ( $list as $k => $item )
 			{
-				$todo == 'copy' ? $this->rcopy( $from. '/' .$item, $dest. '/' . $item ) : ( $todo == 'cut' ? $this->rrename( $from. '/' .$item, $dest. '/' .$item ) : '' );
+				$source = str_replace('//', '/', $from. '/' .$item);
+				$desty	= str_replace('//', '/', $dest. '/' . $item);
+				$todo == 'copy' ? $this->rcopy( $source, $desty ) : ( $todo == 'cut' ? $this->rrename( $source, $desty ) : '' );
 			}
 
 			return $this->json_success("done", [
 				"path" 		=> $path,
-				"moveorcopy"=>true,
+				"moveorcopy"=> true,
 				"dirs"		=> $this->getPathFiles( $path )
 			]);
+		}
+
+		/**
+		* @method watch
+		* @return json
+		*/
+		public function watch()
+		{
+			$path = str_replace('?w=', '', Posts::get(0));
+			$path = strlen( trim($path) ) ? $path.'/' : './';
+			echo $path; exit();
 		}
 
 		/**
@@ -269,13 +283,19 @@
 		*/
 		public function delTree($dir)
 		{
-			$files = array_diff(scandir($dir), array('.','..'));
+			if ( is_dir($dir) )
+			{
+				$files = array_diff(scandir($dir), array('.','..'));
 
-			foreach ($files as $file) {
-			  (is_dir("$dir/$file")) ? delTree("$dir/$file") : @unlink("$dir/$file");
+				foreach ($files as $file) {
+					(is_dir("$dir/$file")) ? delTree("$dir/$file") : @unlink("$dir/$file");
+				}
+
+				return @rmdir($dir);
 			}
-
-			return @rmdir($dir);
+			else {
+				return @unlink( $dir );
+			}
 		}
 
 		/**
@@ -284,6 +304,24 @@
 		* @return json
 		*/
 		function rcopy($src, $dst) {
+			// if source is the same as destination, then duplicate with new name
+			if ( $src == $dst )
+			{
+				$i = 1;
+				$d = explode('.', $dst);
+				$c = count($d);
+
+				if ( $c > 1 && strlen($d[ $c-2 ]) )
+					$d[ $c-2 ] = $d[ $c-2 ].'_1';
+				else
+					$d[ $c-1 ] = $d[ $c-1 ].'_1';
+
+				$dst = implode('.', $d);
+			}
+
+			// var_dump( $src, $dst ); exit();
+
+			// then operate
 			if (file_exists($dst)) $this->delTree($dst);
 			if (is_dir($src)) {
 				mkdir($dst);
@@ -300,6 +338,13 @@
 		* @return json
 		*/
 		function rrename($src, $dst) {
+			// if the source is the same as the destination
+			if ( $src == $dst )
+			{
+				return false;
+			}
+
+			// then operate
 			if (file_exists($dst)) $this->delTree($dst);
 			if (is_dir($src)) {
 				mkdir($dst);

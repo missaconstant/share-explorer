@@ -31,7 +31,8 @@ var app = new Vue({
             searchbar   : { shown: false, value: '' },
             tinysidebar : { shown: false },
             dropzone    : { shown: false },
-            clipboard   : { todo: null, tomove: [], frompath: '' }
+            clipboard   : { todo: null, tomove: [], frompath: '' },
+            watching    : { state: false, intval: null }
         },
         jprompt : new JDialog(),
         jalert  : new JDialog()
@@ -53,39 +54,42 @@ var app = new Vue({
 
             // load path dirs
             self.loadPath( self.path );
-        });
 
-        // mount stoneUpload
-        seHelp.stoneUpload.init({
-            dropzone: document.querySelector('.current-dir'),
-            droplist: document.querySelector('.dropzone .body .wrapper'),
-            server  : self.api + '/upload',
-            dataType: 'json',
-            auto    : true,
-            maxConcurrent: 3,
-            ondroped: function () {
-                // open dropzone
-                self.toggleDropzone(true);
-            },
-            onbeforesend: function(fd, file) {
-                fd.append('path', self.path);
-                fd.append('index', file.index);
-                return fd;
-            },
-            onfilecomplete: function (e, file, response) {
-                // if upload & copy ok, update visual dir
-                if ( response.moved ) {
-                    self.loadPath(false, false, true);
-                    return true;
+            // mount stoneUpload
+            seHelp.stoneUpload.init({
+                dropzone: document.querySelector('.current-dir'),
+                droplist: document.querySelector('.dropzone .body .wrapper'),
+                server  : self.api + '/upload',
+                dataType: 'json',
+                auto    : true,
+                maxConcurrent: 3,
+                ondroped: function () {
+                    // open dropzone
+                    self.toggleDropzone(true);
+                },
+                onbeforesend: function(fd, file) {
+                    fd.append('path', self.path);
+                    fd.append('index', file.index);
+                    return fd;
+                },
+                onfilecomplete: function (e, file, response) {
+                    // if upload & copy ok, update visual dir
+                    if ( response.moved ) {
+                        self.loadPath(false, false, true);
+                        return true;
+                    }
+
+                    // when copy failed on server
+                    seHelp.stoneUpload.updateStates(response.index, {
+                        doing: 'failed',
+                        message: response.cause
+                    });
+                    return false;
                 }
+            });
 
-                // when copy failed on server
-                seHelp.stoneUpload.updateStates(response.index, {
-                    doing: 'failed',
-                    message: response.cause
-                });
-                return false;
-            }
+            // load start watcher
+            // self.watchFolder();
         });
     },
 
@@ -124,6 +128,9 @@ var app = new Vue({
         loadPath: function (_path, goingback, refreshing, isfile) {
             var self    = this;
             var oldpath = this.path;
+
+            // stop watcher for a while
+            this.settings.watching.state = true;
 
             // if is file, open the file if possible
             if ( isfile ) {
@@ -184,8 +191,10 @@ var app = new Vue({
             .fail(function (err) {
                 // restore leaving path as current
                 self.path = oldpath;
-
-                console.log(err);
+            })
+            .always(function () {
+                // release watching state
+                self.settings.watching.state = false;
             });
         },
 
@@ -450,6 +459,40 @@ var app = new Vue({
                 // hide loader
                 seHelp.loader.hide();
             });
+        },
+
+        /**
+        * @method watchFolder
+        * ---
+        */
+        watchFolder: function (destroywatcher) {
+            var self = this;
+
+            if ( destroywatcher ) {
+                clearInterval( this.settings.watching.intval );
+                this.settings.watching.state = false;
+            }
+
+            this.settings.watching.invtal = setInterval(function () {
+                if ( !self.settings.watching.state ) {
+                    self.settings.watching.state = true;
+
+                    $.ajax({
+                        url: self.api + '/defaults/watch/?w=' + encodeURIComponent(self.path),
+                        type: 'get',
+                        dataType: 'text'
+                    })
+                    .done(function (response) {
+                        console.log(response);
+                    })
+                    .fail(function (err) {
+
+                    })
+                    .always(function () {
+                        self.settings.watching.state = false;
+                    });
+                }
+            }, 3000);
         },
 
         /**

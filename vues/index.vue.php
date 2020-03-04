@@ -40,7 +40,7 @@
                             </div>
                         </li>
                         <li>
-                            <a href="#!"><i class="icon ion-md-cloud"></i></a>
+                            <a href="#!" @click="pasteFiles(false)" v-if="settings.clipboard.tomove.length" class="bg-danger"><i class="icon ion-md-clipboard text-white"></i></a>
                         </li>
                         <li>
                             <a href="#!"><i class="icon ion-md-globe"></i></a>
