@@ -135,12 +135,24 @@ var app = new Vue({
             // if is file, open the file if possible
             if ( isfile ) {
                 var nameparts   = _path.split('.');
-                var link        = this.api + '/defaults/download/?l=' + encodeURIComponent(this.path + '/' + _path);
+                // var checkon     = ['mp4'].indexOf( nameparts[ nameparts.length-1 ].toLowerCase() );
+                var link        = this.api + '/defaults/download/?s=' + encodeURIComponent(this.path + '/' + _path);
 
-                switch ( nameparts[ nameparts.length-1 ] ) {
+                switch ( nameparts[ nameparts.length-1 ].toLowerCase() ) {
                     case 'mp4':
-                        document.querySelector('#myvideo').querySelector('source').src = link;
-                        document.querySelector('a.afterglow').click();
+                        jVideo.play( link );
+                        break;
+
+                    case 'jpg':
+                    case 'jpeg':
+                    case 'png':
+                    case 'gif':
+                    case 'bmp':
+                        view.show(link);
+                        break;
+
+                    case 'pdf':
+                        window.open(link);
                         break;
                 }
                 return;
@@ -679,6 +691,18 @@ var app = new Vue({
             }
 
             return torender + '.png';
+        },
+
+        /**
+        * @method showFileNamePart
+        * ---
+        */
+        showFileNamePart: function (file) {
+            var parts   = file.filename.split('.');
+            var exts    = parts[ parts.length-1 ];
+            var name    = parts; name.pop();
+
+            return window.fileexts.indexOf( exts ) != -1 && file.isfile ? name.join('.') : file.filename;
         }
     }
 

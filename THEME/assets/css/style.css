@@ -29,332 +29,396 @@ div.main {
   bottom: 0;
   right: 0;
   overflow: hidden; }
-  div.main .app {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    transition: all 0.3s ease; }
-    div.main .app.with-tiny {
-      padding-left: 80px; }
-    div.main .app.with-dzone {
-      padding-right: 300px; }
-    div.main .app .tiny-sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 80px;
-      box-sizing: border-box;
-      box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.1);
-      background: #fff;
-      z-index: 3;
-      transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
-      div.main .app .tiny-sidebar .logo {
-        display: block;
-        padding: 15px; }
-        div.main .app .tiny-sidebar .logo img {
-          width: 100%; }
-      div.main .app .tiny-sidebar .links {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        margin-top: 20px; }
-        div.main .app .tiny-sidebar .links li {
-          box-sizing: border-box; }
-          div.main .app .tiny-sidebar .links li.active {
-            border-left: 2px solid #777; }
-            div.main .app .tiny-sidebar .links li.active i {
-              color: #ffa000 !important; }
-          div.main .app .tiny-sidebar .links li.tobottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%; }
-          div.main .app .tiny-sidebar .links li a {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            font-size: 25px;
-            padding: 15px 0;
-            box-sizing: border-box; }
-            div.main .app .tiny-sidebar .links li a:hover {
-              background: #fbfbfb; }
-            div.main .app .tiny-sidebar .links li a i {
-              color: #555; }
-    div.main .app .main-content {
-      height: 100%;
-      width: 100%;
-      background: #fbfbfb;
-      box-sizing: border-box;
-      padding: 1px 0px 0px 0px;
-      padding-top: 80px;
-      position: relative; }
-      div.main .app .main-content .topbar {
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        padding-left: 80px;
-        padding-top: 0px;
-        background: #fbfbfb;
-        z-index: 2; }
-        div.main .app .main-content .topbar .bar-wrap {
-          position: relative;
-          height: 80px;
-          border-bottom: 1px solid #ddd;
-          background: #fbfbfb;
-          z-index: 2; }
-        div.main .app .main-content .topbar .icons .actions li {
-          font-size: 22px;
-          padding: 0 25px;
-          color: #555; }
-          div.main .app .main-content .topbar .icons .actions li i {
-            cursor: pointer; }
-        div.main .app .main-content .topbar .icons.icons-right .actions li {
-          padding: 0 20px; }
-        div.main .app .main-content .topbar .location-bar {
-          position: relative;
-          padding: 0px;
-          border-radius: 20px; }
-          div.main .app .main-content .topbar .location-bar .bar-text {
-            color: #777;
-            font-size: 13px;
-            font-weight: bold;
-            width: 100%;
-            border-radius: 20px;
-            border: 0;
-            height: 35px;
-            background: transparent;
-            text-align: center;
-            outline: none;
-            letter-spacing: 1px;
-            transition: all 0.3s ease; }
-            div.main .app .main-content .topbar .location-bar .bar-text:focus {
-              background: #fff;
-              box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.08); }
-          div.main .app .main-content .topbar .location-bar .ico {
-            position: absolute;
-            left: 3px;
-            top: 2px;
-            width: 30px;
-            height: 30px;
-            border: 2px solid #ddd;
-            border-radius: 50%;
-            line-height: 28px;
-            text-align: center;
-            color: #ddd; }
-        div.main .app .main-content .topbar .searchbar {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          width: 100%;
-          min-height: 40px;
-          background: #fff;
-          box-shadow: 0 3px 5px rgba(0, 0, 0, 0.07);
-          transform: translateY(-100%);
-          transition: all 0.3s ease;
-          opacity: 0;
-          z-index: 1; }
-          div.main .app .main-content .topbar .searchbar.shown {
-            transform: translateY(0);
-            opacity: 1; }
-          div.main .app .main-content .topbar .searchbar input {
-            width: 100%;
-            height: 40px;
-            border: 0;
-            padding: 0 20px;
-            text-align: center;
-            outline: 0;
-            color: #555; }
-            div.main .app .main-content .topbar .searchbar input::placeholder {
-              color: #bbb; }
-      div.main .app .main-content .current-dir {
-        height: calc(100%);
-        padding: 0 0px;
-        overflow: auto; }
-        div.main .app .main-content .current-dir .title {
-          font-weight: bold;
-          color: #777;
-          padding: 0 45px; }
-        div.main .app .main-content .current-dir .files-folders {
-          padding: 0 15px; }
-          div.main .app .main-content .current-dir .files-folders .items .item {
-            position: relative;
-            width: 150px;
-            min-height: 150px;
-            margin-bottom: 35px;
-            padding: 15px 0;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease; }
-            div.main .app .main-content .current-dir .files-folders .items .item:hover {
-              background: #fff;
-              box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.1); }
-              div.main .app .main-content .current-dir .files-folders .items .item:hover .filecontextmenu {
-                transform: scale(1); }
-            div.main .app .main-content .current-dir .files-folders .items .item .filecontextmenu {
-              position: absolute;
-              top: 10px;
-              right: 10px;
-              font-size: 20px;
-              padding: 0 10px;
-              color: #999;
-              transform: scale(0);
-              transition: all 0.3s ease;
-              outline: none; }
-              div.main .app .main-content .current-dir .files-folders .items .item .filecontextmenu:hover {
-                background: #f1f1f1;
-                border-radius: 3px; }
-            div.main .app .main-content .current-dir .files-folders .items .item .ico-png {
-              width: 70%; }
-            div.main .app .main-content .current-dir .files-folders .items .item .item-name {
-              display: block;
-              font-size: 14px;
-              font-weight: bold;
-              color: #555;
-              margin-top: 10px;
-              word-wrap: break-word; }
-        div.main .app .main-content .current-dir .fs-upload-target {
-          position: fixed;
-          right: 20px;
-          bottom: 30px;
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          background-color: #576d7e;
-          box-shadow: 1px 3px 10px rgba(87, 109, 126, 0.5);
-          text-align: center;
-          z-index: 5;
-          transform: scale(0) rotate(-90deg);
-          opacity: 0;
-          transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
-          div.main .app .main-content .current-dir .fs-upload-target .icon {
-            position: absolute !important;
-            top: 50% !important;
-            left: 50% !important;
-            font-size: 25px !important; }
-        div.main .app .main-content .current-dir.show-fst-trigger .fs-upload-target {
-          opacity: 1;
-          transform: scale(1) rotate(0deg); }
-        div.main .app .main-content .current-dir .fs-upload-input {
-          height: 0;
-          width: 0; }
-  div.main .dropzone {
-    position: absolute;
-    top: 81px;
-    right: 0;
-    height: calc(100% - 81px);
-    width: 300px;
-    background: #fff;
-    box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.08);
-    z-index: 4;
-    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-    transform: translateX(100%); }
-    div.main .dropzone.shown {
-      transform: translateX(0);
-      opacity: 1; }
-    div.main .dropzone .head {
-      padding: 20px 20px; }
-      div.main .dropzone .head h4 {
-        margin: 0;
-        font-size: 16px;
-        font-weight: bold;
-        color: #555;
-        text-align: center; }
-        div.main .dropzone .head h4 i {
-          display: inline-block;
-          color: #01D38C;
-          margin-right: 10px;
-          transform: translateY(2px); }
-      div.main .dropzone .head .icon {
-        font-size: 21px;
-        display: inline-block;
-        color: #777;
-        cursor: pointer; }
-    div.main .dropzone .body {
-      padding: 0 0 70px 0;
-      overflow-y: auto;
-      overflow-x: hidden; }
-      div.main .dropzone .body .when-no-upload {
-        position: absolute;
-        width: 100%;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-        font-size: 13px;
-        font-weight: bold;
-        color: #888; }
-        div.main .dropzone .body .when-no-upload i {
-          font-size: 25px; }
-      div.main .dropzone .body div.uploading-box {
-        padding: 15px 0;
-        margin: 0 10px;
-        transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-        transform-origin: top center;
-        overflow: hidden; }
-        div.main .dropzone .body div.uploading-box .piclabel {
-          width: 50px;
-          height: 50px; }
-          div.main .dropzone .body div.uploading-box .piclabel img {
-            width: 100%; }
-        div.main .dropzone .body div.uploading-box .upload-infos {
-          padding-left: 10px;
-          padding-right: 5px; }
-          div.main .dropzone .body div.uploading-box .upload-infos .up-head .up-name {
-            font-size: 13px;
-            font-weight: bold;
-            color: #555; }
-          div.main .dropzone .body div.uploading-box .upload-infos .up-head .up-filesize {
-            font-size: 11px;
-            font-weight: bold;
-            color: #ccc;
-            padding: 0 7px;
-            padding-top: 2px; }
-          div.main .dropzone .body div.uploading-box .upload-infos .up-head .up-closebtn {
-            color: #555;
-            text-align: right;
-            line-height: 15px;
-            cursor: pointer; }
-          div.main .dropzone .body div.uploading-box .upload-infos .up-progressbar {
-            position: relative;
-            margin-top: 6px;
-            height: 3px;
-            background: #ddd;
-            border-radius: 20px; }
-            div.main .dropzone .body div.uploading-box .upload-infos .up-progressbar .up-progress {
-              position: absolute;
-              left: 0;
-              top: -1px;
-              width: 0%;
-              height: 5px;
-              background: #01D38C;
-              box-shadow: 1px 1px 5px rgba(1, 211, 140, 0.6);
-              border-radius: 20px;
-              transition: all .6s ease; }
-          div.main .dropzone .body div.uploading-box .upload-infos .up-state {
-            margin-top: 7px; }
-            div.main .dropzone .body div.uploading-box .upload-infos .up-state .up-percent,
-            div.main .dropzone .body div.uploading-box .upload-infos .up-state .up-speed {
-              font-size: 11px;
-              font-weight: bold;
-              color: #aaa; }
-        div.main .dropzone .body div.uploading-box.failed .up-progressbar .up-progress {
-          background: #c54444;
-          box-shadow: 1px 1px 5px rgba(218, 24, 24, 0.6); }
-  div.main .dzone-toggle {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    border: 0;
-    border-radius: 50%;
-    background: #444;
-    color: #fff;
-    box-shadow: 2px 3px 25px rgba(0, 0, 0, 0.3);
-    outline: none;
-    z-index: 3; }
+
+div.main .app {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  transition: all 0.3s ease; }
+
+div.main .app.with-tiny {
+  padding-left: 80px; }
+
+div.main .app.with-dzone {
+  padding-right: 300px; }
+
+div.main .app .tiny-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 80px;
+  box-sizing: border-box;
+  box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  z-index: 3;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
+
+div.main .app .tiny-sidebar .logo {
+  display: block;
+  padding: 15px; }
+
+div.main .app .tiny-sidebar .logo img {
+  width: 100%; }
+
+div.main .app .tiny-sidebar .links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 20px; }
+
+div.main .app .tiny-sidebar .links li {
+  box-sizing: border-box; }
+
+div.main .app .tiny-sidebar .links li.active {
+  border-left: 2px solid #777; }
+
+div.main .app .tiny-sidebar .links li.active i {
+  color: #ffa000 !important; }
+
+div.main .app .tiny-sidebar .links li.tobottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%; }
+
+div.main .app .tiny-sidebar .links li a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 25px;
+  padding: 15px 0;
+  box-sizing: border-box; }
+
+div.main .app .tiny-sidebar .links li a:hover {
+  background: #fbfbfb; }
+
+div.main .app .tiny-sidebar .links li a i {
+  color: #555; }
+
+div.main .app .main-content {
+  height: 100%;
+  width: 100%;
+  background: #fbfbfb;
+  box-sizing: border-box;
+  padding: 1px 0px 0px 0px;
+  padding-top: 80px;
+  position: relative; }
+
+div.main .app .main-content .topbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding-left: 80px;
+  padding-top: 0px;
+  background: #fbfbfb;
+  z-index: 2; }
+
+div.main .app .main-content .topbar .bar-wrap {
+  position: relative;
+  height: 80px;
+  border-bottom: 1px solid #ddd;
+  background: #fbfbfb;
+  z-index: 2; }
+
+div.main .app .main-content .topbar .icons .actions li {
+  font-size: 22px;
+  padding: 0 25px;
+  color: #555; }
+
+div.main .app .main-content .topbar .icons .actions li i {
+  cursor: pointer; }
+
+div.main .app .main-content .topbar .icons.icons-right .actions li {
+  padding: 0 20px; }
+
+div.main .app .main-content .topbar .location-bar {
+  position: relative;
+  padding: 0px;
+  border-radius: 20px; }
+
+div.main .app .main-content .topbar .location-bar .bar-text {
+  color: #777;
+  font-size: 13px;
+  font-weight: bold;
+  width: 100%;
+  border-radius: 20px;
+  border: 0;
+  height: 35px;
+  background: transparent;
+  text-align: center;
+  outline: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease; }
+
+div.main .app .main-content .topbar .location-bar .bar-text:focus {
+  background: #fff;
+  box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.08); }
+
+div.main .app .main-content .topbar .location-bar .ico {
+  position: absolute;
+  left: 3px;
+  top: 2px;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  line-height: 28px;
+  text-align: center;
+  color: #ddd; }
+
+div.main .app .main-content .topbar .searchbar {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  min-height: 40px;
+  background: #fff;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.07);
+  transform: translateY(-100%);
+  transition: all 0.3s ease;
+  opacity: 0;
+  z-index: 1; }
+
+div.main .app .main-content .topbar .searchbar.shown {
+  transform: translateY(0);
+  opacity: 1; }
+
+div.main .app .main-content .topbar .searchbar input {
+  width: 100%;
+  height: 40px;
+  border: 0;
+  padding: 0 20px;
+  text-align: center;
+  outline: 0;
+  color: #555; }
+
+div.main .app .main-content .topbar .searchbar input::placeholder {
+  color: #bbb; }
+
+div.main .app .main-content .current-dir {
+  height: calc(100%);
+  padding: 0 0px;
+  overflow: auto; }
+
+div.main .app .main-content .current-dir .title {
+  font-weight: bold;
+  color: #777;
+  padding: 0 45px; }
+
+div.main .app .main-content .current-dir .files-folders {
+  padding: 0 15px; }
+
+div.main .app .main-content .current-dir .files-folders .items .item {
+  position: relative;
+  width: 150px;
+  min-height: 150px;
+  margin-bottom: 35px;
+  padding: 15px 0;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease; }
+
+div.main .app .main-content .current-dir .files-folders .items .item:hover {
+  background: #fff;
+  box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.1); }
+
+div.main .app .main-content .current-dir .files-folders .items .item:hover .filecontextmenu {
+  transform: scale(1); }
+
+div.main .app .main-content .current-dir .files-folders .items .item .filecontextmenu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  padding: 0 10px;
+  color: #999;
+  transform: scale(0);
+  transition: all 0.3s ease;
+  outline: none; }
+
+div.main .app .main-content .current-dir .files-folders .items .item .filecontextmenu:hover {
+  background: #f1f1f1;
+  border-radius: 3px; }
+
+div.main .app .main-content .current-dir .files-folders .items .item .ico-png {
+  width: 70%; }
+
+div.main .app .main-content .current-dir .files-folders .items .item .item-name {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555;
+  margin-top: 10px;
+  word-wrap: break-word; }
+
+div.main .app .main-content .current-dir .fs-upload-target {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #576d7e;
+  box-shadow: 1px 3px 10px rgba(87, 109, 126, 0.5);
+  text-align: center;
+  z-index: 5;
+  transform: scale(0) rotate(-90deg);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
+
+div.main .app .main-content .current-dir .fs-upload-target .icon {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  font-size: 25px !important; }
+
+div.main .app .main-content .current-dir.show-fst-trigger .fs-upload-target {
+  opacity: 1;
+  transform: scale(1) rotate(0deg); }
+
+div.main .app .main-content .current-dir .fs-upload-input {
+  height: 0;
+  width: 0; }
+
+div.main .dropzone {
+  position: absolute;
+  top: 81px;
+  right: 0;
+  height: calc(100% - 81px);
+  width: 300px;
+  background: #fff;
+  box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.08);
+  z-index: 4;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  transform: translateX(100%); }
+
+div.main .dropzone.shown {
+  transform: translateX(0);
+  opacity: 1; }
+
+div.main .dropzone .head {
+  padding: 20px 20px; }
+
+div.main .dropzone .head h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  text-align: center; }
+
+div.main .dropzone .head h4 i {
+  display: inline-block;
+  color: #01D38C;
+  margin-right: 10px;
+  transform: translateY(2px); }
+
+div.main .dropzone .head .icon {
+  font-size: 21px;
+  display: inline-block;
+  color: #777;
+  cursor: pointer; }
+
+div.main .dropzone .body {
+  padding: 0 0 70px 0;
+  overflow-y: auto;
+  overflow-x: hidden; }
+
+div.main .dropzone .body .when-no-upload {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 13px;
+  font-weight: bold;
+  color: #888; }
+
+div.main .dropzone .body .when-no-upload i {
+  font-size: 25px; }
+
+div.main .dropzone .body div.uploading-box {
+  padding: 15px 0;
+  margin: 0 10px;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  transform-origin: top center;
+  overflow: hidden; }
+
+div.main .dropzone .body div.uploading-box .piclabel {
+  width: 50px;
+  height: 50px; }
+
+div.main .dropzone .body div.uploading-box .piclabel img {
+  width: 100%; }
+
+div.main .dropzone .body div.uploading-box .upload-infos {
+  padding-left: 10px;
+  padding-right: 5px; }
+
+div.main .dropzone .body div.uploading-box .upload-infos .up-head .up-name {
+  font-size: 13px;
+  font-weight: bold;
+  color: #555; }
+
+div.main .dropzone .body div.uploading-box .upload-infos .up-head .up-filesize {
+  font-size: 11px;
+  font-weight: bold;
+  color: #ccc;
+  padding: 0 7px;
+  padding-top: 2px; }
+
+div.main .dropzone .body div.uploading-box .upload-infos .up-head .up-closebtn {
+  color: #555;
+  text-align: right;
+  line-height: 15px;
+  cursor: pointer; }
+
+div.main .dropzone .body div.uploading-box .upload-infos .up-progressbar {
+  position: relative;
+  margin-top: 6px;
+  height: 3px;
+  background: #ddd;
+  border-radius: 20px; }
+
+div.main .dropzone .body div.uploading-box .upload-infos .up-progressbar .up-progress {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 0%;
+  height: 5px;
+  background: #01D38C;
+  box-shadow: 1px 1px 5px rgba(1, 211, 140, 0.6);
+  border-radius: 20px;
+  transition: all .6s ease; }
+
+div.main .dropzone .body div.uploading-box .upload-infos .up-state {
+  margin-top: 7px; }
+
+div.main .dropzone .body div.uploading-box .upload-infos .up-state .up-percent,
+div.main .dropzone .body div.uploading-box .upload-infos .up-state .up-speed {
+  font-size: 11px;
+  font-weight: bold;
+  color: #aaa; }
+
+div.main .dropzone .body div.uploading-box.failed .up-progressbar .up-progress {
+  background: #c54444;
+  box-shadow: 1px 1px 5px rgba(218, 24, 24, 0.6); }
+
+div.main .dzone-toggle {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  border: 0;
+  border-radius: 50%;
+  background: #444;
+  color: #fff;
+  box-shadow: 2px 3px 25px rgba(0, 0, 0, 0.3);
+  outline: none;
+  z-index: 3; }
 
 .se-loader-sm {
   position: fixed;
@@ -363,21 +427,24 @@ div.main {
   z-index: 7;
   transform: translateY(calc(100% + 70px));
   transition: all 0.3s ease; }
-  .se-loader-sm.shown {
-    transform: translateY(0); }
-  .se-loader-sm .loadbox {
-    width: 350px;
-    height: 100px;
-    background: #fff;
-    box-shadow: 1px 3px 25px rgba(0, 0, 0, 0.1);
-    padding: 0 30px;
-    box-sizing: border-box;
-    position: relative; }
-    .se-loader-sm .loadbox .content {
-      margin-left: 30px;
-      font-size: 15px;
-      color: #555;
-      font-weight: bold; }
+
+.se-loader-sm.shown {
+  transform: translateY(0); }
+
+.se-loader-sm .loadbox {
+  width: 350px;
+  height: 100px;
+  background: #fff;
+  box-shadow: 1px 3px 25px rgba(0, 0, 0, 0.1);
+  padding: 0 30px;
+  box-sizing: border-box;
+  position: relative; }
+
+.se-loader-sm .loadbox .content {
+  margin-left: 30px;
+  font-size: 15px;
+  color: #555;
+  font-weight: bold; }
 
 .se-dropdowns .dropdown-toggle::after {
   display: none; }
@@ -386,26 +453,31 @@ div.main {
   padding: 0;
   border: 0;
   box-shadow: 1px 3px 20px rgba(0, 0, 0, 0.1); }
-  .se-dropdowns .dropdown-menu.show {
-    animation: showdropdown 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    animation-fill-mode: forwards; }
-  .se-dropdowns .dropdown-menu .dropdown-item {
-    font-size: 13px !important;
-    font-weight: bold !important;
-    text-align: left !important;
-    color: #777;
-    padding: 12px 15px !important; }
-    .se-dropdowns .dropdown-menu .dropdown-item:active {
-      background: #f1f1f1; }
-    .se-dropdowns .dropdown-menu .dropdown-item i {
-      display: inline-block;
-      width: 15px;
-      font-size: 18px;
-      margin-right: 7px;
-      color: #F6C358 !important;
-      transform: translateY(2px); }
-  .se-dropdowns .dropdown-menu .dropdown-divider {
-    margin: 0; }
+
+.se-dropdowns .dropdown-menu.show {
+  animation: showdropdown 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  animation-fill-mode: forwards; }
+
+.se-dropdowns .dropdown-menu .dropdown-item {
+  font-size: 13px !important;
+  font-weight: bold !important;
+  text-align: left !important;
+  color: #777;
+  padding: 12px 15px !important; }
+
+.se-dropdowns .dropdown-menu .dropdown-item:active {
+  background: #f1f1f1; }
+
+.se-dropdowns .dropdown-menu .dropdown-item i {
+  display: inline-block;
+  width: 15px;
+  font-size: 18px;
+  margin-right: 7px;
+  color: #F6C358 !important;
+  transform: translateY(2px); }
+
+.se-dropdowns .dropdown-menu .dropdown-divider {
+  margin: 0; }
 
 @keyframes showdropdown {
   from {
@@ -425,8 +497,8 @@ div.main {
     padding-left: 0; }
   div.main .app .tiny-sidebar {
     transform: translateX(-100%); }
-    div.main .app .tiny-sidebar.shown {
-      transform: translateX(0%) !important; }
+  div.main .app .tiny-sidebar.shown {
+    transform: translateX(0%) !important; }
   div.main .app .main-content .topbar .location-bar .ico {
     position: static;
     display: block;

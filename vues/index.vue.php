@@ -7,7 +7,10 @@
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/fonts/ionicons/docs/css/ionicons.min.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/css/upload.css">
+        <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/videojs/video-js.min.css">
+        <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/JDialog/JDialog.css">
+        <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/css/jVideo.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/css/style.css">
     </head>
     <body>
@@ -119,7 +122,7 @@
                                     </a>
                                     <!-- <i class="icon" v-bind:class="item.isfile ? 'ion-md-document' : 'ion-md-folder'"></i> -->
                                     <img v-bind:src="'<?= framer\Statics::$THEME ?>assets/images/file-icons/' + renderFileIcon(item)" alt="" class="ico-png">
-                                    <span class="item-name">{{ item.filename }}</span>
+                                    <span class="item-name">{{ showFileNamePart(item) }}</span>
 
                                     <!--  -->
 
@@ -219,18 +222,27 @@
             </div>
         </div> -->
 
-        <!-- Afterglow Player -->
-        <div class="d-none">
-            <a class="afterglow d-none" href="#myvideo" data-overscale="false"></a>
-            <video id="myvideo" width="1920" height="1080">
-                <source type="video/mp4" src="" />
-            </video>
+        <!-- Player -->
+        <div class="jVideo">
+            <div class="overlay"></div>
+            <div class="player-box">
+                <!--  -->
+            </div>
+        </div>
+
+        <!-- Picture viewer -->
+        <div class="pictoview">
+            <img src="" alt="" id="picviewer" class="d-none">
         </div>
 
         <!-- scripts -->
         <script src="<?= framer\Statics::$THEME ?>assets/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js" charset="utf-8"></script>
-        <script src="<?= framer\Statics::$THEME ?>assets/js/afterglow.min.js" charset="utf-8"></script>
+        <!-- <script src="<?= framer\Statics::$THEME ?>assets/js/afterglow.min.js" charset="utf-8"></script> -->
+        <script src="<?= framer\Statics::$THEME ?>assets/js/videojs/video.min.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/videojs/jVideo.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/view.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/vue.dev.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/core.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/upload.js" charset="utf-8"></script>

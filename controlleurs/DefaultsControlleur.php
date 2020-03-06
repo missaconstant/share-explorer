@@ -2,6 +2,8 @@
 
 	namespace framer;
 
+	include_once __DIR__ . '/../core/streaming.php';
+
 	/**
 	*
 	*/
@@ -130,7 +132,8 @@
 
 			// get the part element from path
 			// and merge it to final file path
-			$first = str_replace('?l=', '', Posts::get(0));
+			$split = preg_match("#\?l=#", Posts::get(0)) ? '?l=' : '?s=';
+			$first = str_replace($split, '', Posts::get(0));
 			array_unshift( $filepath, $first );
 
 			// then mount file path
@@ -139,15 +142,23 @@
 			// download
 			if ( file_exists($filepath) )
 			{
-			    header('Content-Description: File Transfer');
-			    header('Content-Type: application/octet-stream');
-			    header('Content-Disposition: attachment; filename="'.basename($filepath).'"');
-			    header('Expires: 0');
-			    header('Cache-Control: must-revalidate');
-			    header('Pragma: public');
-			    header('Content-Length: ' . filesize($filepath));
-			    readfile($filepath);
-			    exit;
+				if ( preg_match("#\?l=#", Posts::get(0)) )
+				{
+					header('Content-Description: File Transfer');
+					header('Content-Type: application/octet-stream');
+					header('Content-Disposition: attachment; filename="'.basename($filepath).'"');
+					header('Expires: 0');
+					header('Cache-Control: must-revalidate');
+					header('Pragma: public');
+					header('Content-Length: ' . filesize($filepath));
+					readfile($filepath);
+					exit;
+				}
+				else if ( preg_match("#\?s=#", Posts::get(0)) )
+				{
+					$stream = new \VideoStream($filepath);
+					$stream->start();
+				}
 			}
 		}
 
