@@ -134,7 +134,15 @@ var app = new Vue({
 
             // if is file, open the file if possible
             if ( isfile ) {
-                // do open stuff
+                var nameparts   = _path.split('.');
+                var link        = this.api + '/defaults/download/?l=' + encodeURIComponent(this.path + '/' + _path);
+
+                switch ( nameparts[ nameparts.length-1 ] ) {
+                    case 'mp4':
+                        document.querySelector('#myvideo').querySelector('source').src = link;
+                        document.querySelector('a.afterglow').click();
+                        break;
+                }
                 return;
             }
 

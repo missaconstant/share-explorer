@@ -219,9 +219,18 @@
             </div>
         </div> -->
 
+        <!-- Afterglow Player -->
+        <div class="d-none">
+            <a class="afterglow d-none" href="#myvideo" data-overscale="false"></a>
+            <video id="myvideo" width="1920" height="1080">
+                <source type="video/mp4" src="" />
+            </video>
+        </div>
+
         <!-- scripts -->
         <script src="<?= framer\Statics::$THEME ?>assets/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/afterglow.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/vue.dev.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/core.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/upload.js" charset="utf-8"></script>
