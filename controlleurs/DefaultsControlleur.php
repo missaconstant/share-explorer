@@ -121,6 +121,19 @@
 		{
 			// url format: ?l=PATH
 			// retrieve path to download
+			$c_type		= [
+				"pdf" 	=> "application/pdf",
+				"jpg" 	=> "image/jpg",
+				"jpeg"	=> "image/jpg",
+				"png"	=> "image/png",
+				"gif"	=> "image/gif",
+				"bmp"	=> "image/bmp",
+				"mp4"	=> "video/mp4",
+				"webm"	=> "video/webm",
+				"mp3"	=> "audio/mp3",
+				"ogg"	=> "audio/ogg",
+				"acc"	=> "audio/acc"
+			];
 			$filepath 	= [];
 			$i			= 1;
 
@@ -133,11 +146,19 @@
 			// get the part element from path
 			// and merge it to final file path
 			$split = preg_match("#\?l=#", Posts::get(0)) ? '?l=' : '?s=';
+			$split = preg_match("#\?t=#", Posts::get(0)) ? '?t=' : $split;
 			$first = str_replace($split, '', Posts::get(0));
-			array_unshift( $filepath, $first );
+					 array_unshift( $filepath, $first );
 
 			// then mount file path
 			$filepath = implode( '/', $filepath );
+
+			// get extension
+			$exts = explode('.', $filepath);
+			$exts = count($exts) > 1 && strlen(trim($exts[0])) ? strtolower($exts[ count($exts)-1 ]) : '';
+
+			// get the content type
+			$content_type = $c_type[ $exts ] ?? null;
 
 			// download
 			if ( file_exists($filepath) )
@@ -156,8 +177,15 @@
 				}
 				else if ( preg_match("#\?s=#", Posts::get(0)) )
 				{
-					$stream = new \VideoStream($filepath);
+					$stream = new \VideoStream($filepath, $content_type);
 					$stream->start();
+				}
+				else if ( preg_match("#\?t=#", Posts::get(0)) )
+				{
+
+					header("Content-Type: $content_type");
+					readfile($filepath);
+					exit();
 				}
 			}
 		}

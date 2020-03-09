@@ -258,7 +258,7 @@ div.main {
                             width: 150px;
                             min-height: 150px;
                             margin-bottom: 35px;
-                            padding: 15px 0;
+                            // padding: 15px 0;
                             // border: 1px solid #e0e0e0;
                             text-align: center;
                             cursor: pointer;
@@ -283,6 +283,7 @@ div.main {
                                 transform: scale(0);
                                 transition: all 0.3s ease;
                                 outline: none;
+                                z-index: 2;
 
                                 &:hover {
                                     background: #f1f1f1;
@@ -298,6 +299,22 @@ div.main {
 
                             .ico-png {
                                 width: 70%;
+                                margin: 15px 0;
+                            }
+
+                            .preview {
+                                position: relative;
+                                height: 120px;
+                                margin: 10px;
+                                // border: 1px solid red;
+                                overflow: hidden;
+
+                                img {
+                                    position: absolute;
+                                    width: 100%;
+                                    top: 50%; left: 50%;
+                                    transform: translate(-50%, -50%);
+                                }
                             }
 
                             .item-name {

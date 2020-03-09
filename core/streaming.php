@@ -13,10 +13,12 @@ class VideoStream
     private $start  = -1;
     private $end    = -1;
     private $size   = 0;
+    private $content_type = '';
 
-    function __construct($filePath)
+    function __construct($filePath, $content_type="video/mp4")
     {
         $this->path = $filePath;
+        $this->content_type = $content_type;
     }
 
     /**
@@ -36,7 +38,7 @@ class VideoStream
     private function setHeader()
     {
         ob_get_clean();
-        header("Content-Type: video/mp4");
+        header("Content-Type: " . $this->content_type);
         header("Cache-Control: max-age=2592000, public");
         header("Expires: ".gmdate('D, d M Y H:i:s', time()+2592000) . ' GMT');
         header("Last-Modified: ".gmdate('D, d M Y H:i:s', @filemtime($this->path)) . ' GMT' );

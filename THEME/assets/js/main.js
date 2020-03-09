@@ -135,8 +135,8 @@ var app = new Vue({
             // if is file, open the file if possible
             if ( isfile ) {
                 var nameparts   = _path.split('.');
-                // var checkon     = ['mp4'].indexOf( nameparts[ nameparts.length-1 ].toLowerCase() );
-                var link        = this.api + '/defaults/download/?s=' + encodeURIComponent(this.path + '/' + _path);
+                var checkon     = ['mp4', 'mp3', 'ogg', 'webm'].indexOf( nameparts[ nameparts.length-1 ].toLowerCase() ) != -1;
+                var link        = this.api + '/defaults/download/?'+ (checkon ? 's':'t') +'=' + encodeURIComponent(this.path + '/' + _path);
 
                 switch ( nameparts[ nameparts.length-1 ].toLowerCase() ) {
                     case 'mp4':
@@ -153,6 +153,12 @@ var app = new Vue({
 
                     case 'pdf':
                         window.open(link);
+                        break;
+
+                    case 'mp3':
+                    case 'ogg':
+                    case 'aac':
+                        jhowler.playSounds([ link ]);
                         break;
                 }
                 return;
@@ -421,6 +427,14 @@ var app = new Vue({
         },
 
         /**
+        * @method getDownableLink
+        * ---
+        */
+        getDownableLink: function (file, type) {
+            return this.api + '/defaults/download/?'+ (type || 't') +'=' + encodeURIComponent(this.path + '/' + file.filename);
+        },
+
+        /**
         * @method addClipBoard
         * ---
         */
@@ -602,6 +616,7 @@ var app = new Vue({
             e.preventDefault();
 
             var el = e.target.nodeName == 'LI' ? e.target : e.target.parentNode;
+                el = el.nodeName == 'LI' ? el : el.parentNode;
                 el.querySelector('.dropdown-toggle').click();
         },
 
@@ -698,6 +713,27 @@ var app = new Vue({
         * ---
         */
         showFileNamePart: function (file) {
+            var parts   = file.filename.split('.');
+            var exts    = file.isfile && parts.length>1 && parts[0].trim().length ? parts[ parts.length-1 ] : '';
+            var name    = parts; name.pop();
+                name    = window.fileexts.indexOf( exts ) != -1 && file.isfile ? name.join('.') : file.filename;
+
+            return { ext: exts, name: name };
+        },
+
+        /**
+        * @method isPreviewable
+        * ---
+        */
+        isPreviewable: function (file) {
+            return ['jpg', 'png', 'gif', 'jpeg', 'bmp'].indexOf( this.showFileNamePart(file).ext ) != -1;
+        },
+
+        /**
+        * @method getFileExt
+        * ---
+        */
+        getFileExt: function (file) {
             var parts   = file.filename.split('.');
             var exts    = parts[ parts.length-1 ];
             var name    = parts; name.pop();

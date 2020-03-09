@@ -121,8 +121,11 @@
                                         <i class="icon ion-md-more"></i>
                                     </a>
                                     <!-- <i class="icon" v-bind:class="item.isfile ? 'ion-md-document' : 'ion-md-folder'"></i> -->
-                                    <img v-bind:src="'<?= framer\Statics::$THEME ?>assets/images/file-icons/' + renderFileIcon(item)" alt="" class="ico-png">
-                                    <span class="item-name">{{ showFileNamePart(item) }}</span>
+                                    <img v-bind:src="'<?= framer\Statics::$THEME ?>assets/images/file-icons/' + renderFileIcon(item)" alt="" class="ico-png" v-if="!isPreviewable(item)">
+                                    <div class="preview"  v-if="isPreviewable(item)">
+                                        <img v-bind:src="getDownableLink(item, 't')" alt="">
+                                    </div>
+                                    <span class="item-name">{{ showFileNamePart(item).name }}</span>
 
                                     <!--  -->
 
@@ -243,6 +246,8 @@
         <script src="<?= framer\Statics::$THEME ?>assets/js/videojs/jVideo.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/view.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/howler/howler.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/howler/jhowler.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/vue.dev.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/core.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/upload.js" charset="utf-8"></script>
