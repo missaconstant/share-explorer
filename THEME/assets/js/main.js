@@ -35,7 +35,8 @@ var app = new Vue({
             watching    : { state: false, intval: null }
         },
         jprompt : new JDialog(),
-        jalert  : new JDialog()
+        jalert  : new JDialog(),
+        JAudio  : new JAudio()
     },
 
     created: function () {
@@ -158,7 +159,8 @@ var app = new Vue({
                     case 'mp3':
                     case 'ogg':
                     case 'aac':
-                        jhowler.playSounds([ link ]);
+                        this.JAudio.play({ name: _path, source: link });
+                        this.JAudio.volume.up(50);
                         break;
                 }
                 return;

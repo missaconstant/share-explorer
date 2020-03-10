@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/JDialog/JDialog.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/css/jVideo.css">
+        <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/css/style.css">
     </head>
     <body>
@@ -29,6 +30,7 @@
                     </a>
                     <!--  -->
                     <ul class="links d-flex flex-column">
+                        <!-- go home -->
                         <li class="active" @click="goHome">
                             <a href="#!"><i class="icon ion-md-home"></i></a>
                         </li>
@@ -42,19 +44,22 @@
                                 <a class="dropdown-item" href="#" @click="create('folder', 'dossier')"><i class="icon ion-md-folder"></i> Nouveau Dossier</a>
                             </div>
                         </li>
+                        <!-- paste file in current dir -->
                         <li>
                             <a href="#!" @click="pasteFiles(false)" v-if="settings.clipboard.tomove.length" class="bg-danger"><i class="icon ion-md-clipboard text-white"></i></a>
                         </li>
-                        <li>
-                            <a href="#!"><i class="icon ion-md-globe"></i></a>
+                        <!-- audio player -->
+                        <li class="se-dropdowns dropright">
+                            <a href="#!" class=" dropdown-toggle" data-toggle="dropdown" id="dropnewthings" aria-haspopup="false" data-offset="0,10">
+                                <i class="icon ion-md-add-circle-outline"></i>
+                            </a>
+                            <!--  -->
+                            <div class="dropdown-menu" aria-labelledby="dropnewthings">
+                                <a class="dropdown-item" href="#" @click="create('file', 'fichier')"><i class="icon ion-md-document"></i> Nouveau Fichier</a>
+                                <a class="dropdown-item" href="#" @click="create('folder', 'dossier')"><i class="icon ion-md-folder"></i> Nouveau Dossier</a>
+                            </div>
                         </li>
-                        <!-- <li>
-                            <a href="#!"><i class="icon ion-md-desktop"></i></a>
-                        </li> -->
-                        <li>
-                            <a href="#!"><i class="icon ion-md-cloud-upload"></i></a>
-                        </li>
-                        <li>
+                        <li @click="JAudio.togglePlay()">
                             <a href="#!"><i class="icon ion-md-settings"></i></a>
                         </li>
                         <li class="tobottom">
@@ -225,12 +230,35 @@
             </div>
         </div> -->
 
-        <!-- Player -->
+        <!-- Video Player -->
         <div class="jVideo">
             <div class="overlay"></div>
             <div class="player-box">
                 <!--  -->
             </div>
+        </div>
+
+        <!-- Audio Player -->
+        <div class="jAudio">
+            <div class="playing">
+                <div class="controls flex flex-row">
+                    <a href="#" class="align-self-center">
+                        <i class="icon ion-ios-arrow-back"></i>
+                    </a>
+                    <a href="#" class="main">
+                        <i class="icon ion-ios-play"></i>
+                    </a>
+                    <a href="#">
+                        <i class="icon ion-ios-arrow-forward"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="playlist">
+
+            </div>
+            <a href="#" class="closer">
+                <i class="icon ion-md-close"></i>
+            </a>
         </div>
 
         <!-- Picture viewer -->
@@ -241,13 +269,11 @@
         <!-- scripts -->
         <script src="<?= framer\Statics::$THEME ?>assets/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js" charset="utf-8"></script>
-        <!-- <script src="<?= framer\Statics::$THEME ?>assets/js/afterglow.min.js" charset="utf-8"></script> -->
         <script src="<?= framer\Statics::$THEME ?>assets/js/videojs/video.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/videojs/jVideo.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/view.js" charset="utf-8"></script>
-        <script src="<?= framer\Statics::$THEME ?>assets/js/howler/howler.js" charset="utf-8"></script>
-        <script src="<?= framer\Statics::$THEME ?>assets/js/howler/jhowler.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/vue.dev.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/core.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/upload.js" charset="utf-8"></script>
