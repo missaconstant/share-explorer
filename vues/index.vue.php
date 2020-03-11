@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/JDialog/JDialog.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/css/jVideo.css">
-        <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio.css">
+        <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio-Player.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/css/style.css">
     </head>
     <body>
@@ -250,7 +250,7 @@
                             <i class="icon ion-ios-play playbtn"></i>
                             <i class="icon ion-ios-pause pausebtn"></i>
                         </a>
-                        <a href="#" class="playctrl">
+                        <a href="#" class="playctrl forward">
                             <i class="icon ion-ios-arrow-forward"></i>
                         </a>
                     </div>
@@ -282,6 +282,7 @@
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/view.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudioPlayer.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/vue.dev.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/core.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/upload.js" charset="utf-8"></script>

@@ -91,6 +91,9 @@ var app = new Vue({
 
             // load start watcher
             // self.watchFolder();
+
+            // initialize JAudio player
+            JAudioPlayer( self.JAudio );
         });
     },
 
