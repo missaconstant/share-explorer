@@ -240,17 +240,25 @@
 
         <!-- Audio Player -->
         <div class="jAudio">
-            <div class="playing">
-                <div class="controls flex flex-row">
-                    <a href="#" class="align-self-center">
-                        <i class="icon ion-ios-arrow-back"></i>
-                    </a>
-                    <a href="#" class="main">
-                        <i class="icon ion-ios-play"></i>
-                    </a>
-                    <a href="#">
-                        <i class="icon ion-ios-arrow-forward"></i>
-                    </a>
+            <div class="playing d-flex align-items-center">
+                <div class="play-controls">
+                    <div class="ctrls-wrapper">
+                        <a href="#" class="playctrl backward">
+                            <i class="icon ion-ios-arrow-back"></i>
+                        </a>
+                        <a href="#" class="playctrl main play">
+                            <i class="icon ion-ios-play playbtn"></i>
+                            <i class="icon ion-ios-pause pausebtn"></i>
+                        </a>
+                        <a href="#" class="playctrl">
+                            <i class="icon ion-ios-arrow-forward"></i>
+                        </a>
+                    </div>
+                    <div class="play-progress">
+                        <span class="current-time">00:00</span>
+                        <span class="reamining-time">00:00</span>
+                        <span class="bar"></span>
+                    </div>
                 </div>
             </div>
             <div class="playlist">
