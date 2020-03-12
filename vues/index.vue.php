@@ -262,7 +262,15 @@
                 </div>
             </div>
             <div class="playlist">
-
+                <div class="wrapper">
+                    <div class="song">
+                        <div class="thumb"></div>
+                        <div class="infos">
+                            <span class="title">Name of the song playing.mp3</span>
+                            <span class="album">Album name - 2001</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <a href="#" class="closer">
                 <i class="icon ion-md-close"></i>
@@ -282,7 +290,7 @@
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/view.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio.js" charset="utf-8"></script>
-        <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudioPlayer.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio-Player.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/vue.dev.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/core.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/upload.js" charset="utf-8"></script>

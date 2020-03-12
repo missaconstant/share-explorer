@@ -16,8 +16,20 @@ function JAudio() {
         self.__events.error && self.__events.error();
     };
 
-    this.ontimeupdate = function () {
+    this.__instance.ontimeupdate = function () {
         self.__events.progress && self.__events.progress();
+    };
+
+    this.__instance.onplay = function () {
+        self.__events.play && self.__events.play( self.playlist.get(self.playlist.playing) );
+    };
+
+    this.__instance.onloadedmetadata = function () {
+        self.__events.metaloaded && self.__events.metaloaded( self.playlist.get(self.playlist.playing) );
+    };
+
+    this.__instance.onend = function () {
+        self.__events.end && self.__events.end( self.playlist.get(self.playlist.playing) );
     };
 
     /**
@@ -180,7 +192,7 @@ JAudio.prototype.init = function () {
 * play a song
 */
 JAudio.prototype.on = function (evt, handler) {
-    this.__events[ evt ] = handle;
+    this.__events[ evt ] = handler;
     return this;
 };
 
@@ -241,7 +253,7 @@ JAudio.prototype.stop = function () {
 * toggle a song playing
 */
 JAudio.prototype.togglePlay = function () {
-    if ( this.__instance.paused ) {
+    if ( this.isPaused() ) {
         this.play();
     }
     else {
@@ -252,10 +264,40 @@ JAudio.prototype.togglePlay = function () {
 };
 
 /**
+* @method isPaused
+* check weither the player is paused
+*/
+JAudio.prototype.isPaused = function () {
+    return this.__instance.paused;
+};
+
+/**
+* @method isError
+* check weither the player got error
+*/
+JAudio.prototype.isError = function () {
+    return this.__instance.error;
+};
+
+/**
 * @method loop
 * loop a song
 */
 JAudio.prototype.loop = function (loop) {
     this.__instance.loop = loop || false;
     return this;
+};
+
+/**
+* @method time
+* manage playing time
+*/
+JAudio.prototype.time = function () {
+    var _i = this.__instance;
+
+    return {
+        current     : _i.currentTime,
+        duration    : _i.duration,
+        remaining   : _i.duration - _i.currentTime
+    };
 };
