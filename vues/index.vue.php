@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/fonts/ionicons/docs/css/ionicons.min.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/css/upload.css">
+        <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/simplebar/simplebar.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/videojs/video-js.min.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.css">
         <link rel="stylesheet" href="<?= framer\Statics::$THEME ?>assets/js/JDialog/JDialog.css">
@@ -240,7 +241,7 @@
 
         <!-- Audio Player -->
         <div class="jAudio">
-            <div class="playing d-flex align-items-center">
+            <div class="player d-flex align-items-center">
                 <div class="play-controls">
                     <div class="ctrls-wrapper">
                         <a href="#" class="playctrl backward">
@@ -262,14 +263,17 @@
                 </div>
             </div>
             <div class="playlist">
-                <div class="wrapper">
-                    <div class="song">
-                        <div class="thumb"></div>
+                <div data-simplebar class="wrapper">
+                    <!-- <div class="song playing">
+                        <div class="thumb">
+                            <i class="icon ion-ios-play ispaused"></i>
+                            <i class="icon ion-md-stats isplaying"></i>
+                        </div>
                         <div class="infos">
                             <span class="title">Name of the song playing.mp3</span>
                             <span class="album">Album name - 2001</span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <a href="#" class="closer">
@@ -286,9 +290,11 @@
         <script src="<?= framer\Statics::$THEME ?>assets/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/videojs/video.min.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/simplebar/simplebar.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/videojs/jVideo.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/view.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.3/jsmediatags.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio-Player.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/vue.dev.js" charset="utf-8"></script>

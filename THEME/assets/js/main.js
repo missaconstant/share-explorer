@@ -93,7 +93,7 @@ var app = new Vue({
             // self.watchFolder();
 
             // initialize JAudio player
-            JAudioPlayer( self.JAudio );
+            self.initJAudioPlayer();
         });
     },
 
@@ -744,6 +744,11 @@ var app = new Vue({
             var name    = parts; name.pop();
 
             return window.fileexts.indexOf( exts ) != -1 && file.isfile ? name.join('.') : file.filename;
+        },
+
+        initJAudioPlayer: function () {
+            JAudioPlayer( this.JAudio );
+            new SimpleBar( document.querySelector('.jAudio .playlist .wrapper') );
         }
     }
 

@@ -24,6 +24,10 @@ function JAudio() {
         self.__events.play && self.__events.play( self.playlist.get(self.playlist.playing) );
     };
 
+    this.__instance.onpause = function () {
+        self.__events.pause && self.__events.pause( self.playlist.get(self.playlist.playing) );
+    };
+
     this.__instance.onloadedmetadata = function () {
         self.__events.metaloaded && self.__events.metaloaded( self.playlist.get(self.playlist.playing) );
     };
@@ -107,10 +111,13 @@ function JAudio() {
         /* add song to playlist */
         add: function (song) {
             var songid = this.list.length + 1;
-            this.list.push({ id: songid, name: song.name, source: song.source });
+            var topush = { id: songid, name: song.name, source: song.source };
+
+            // push to list
+            this.list.push(topush);
 
             // fire song add event
-            self.__events.songadd && self.__events.songadd(song);
+            self.__events.songadd && self.__events.songadd(topush);
 
             return songid;
         },
@@ -215,7 +222,7 @@ JAudio.prototype.play = function (song, resetplaylist) {
         this.__events.resume && this.__events.resume();
     }
 
-    song && this.stop();
+    song && this.stop(false);
     this.__instance.play();
 
     return this;
@@ -238,9 +245,9 @@ JAudio.prototype.pause = function () {
 * @method stop
 * stop a song
 */
-JAudio.prototype.stop = function () {
+JAudio.prototype.stop = function (pause) {
     this.__instance.currentTime = 0;
-    this.pause();
+    !pause && this.pause();
 
     // fire stop event
     this.__events.stop && this.__events.stop();
@@ -285,6 +292,42 @@ JAudio.prototype.isError = function () {
 */
 JAudio.prototype.loop = function (loop) {
     this.__instance.loop = loop || false;
+    return this;
+};
+
+/**
+* @method next
+* play next song in playlist
+*/
+JAudio.prototype.prev = function (manual) {
+    var now = this.playlist.playing - 1;
+    var prev = this.playlist.list[ now - 1 ] || null;
+
+    if ( prev ) {
+        this.play( prev.id );
+    }
+    else {
+        manual ? this.play( this.playlist.list[ this.playlist.list.length-1 ].id ) : '';
+    }
+
+    return this;
+};
+
+/**
+* @method next
+* play next song in playlist
+*/
+JAudio.prototype.next = function (manual) {
+    var now = this.playlist.playing - 1;
+    var nxt = this.playlist.list[ now + 1 ] || null;
+
+    if ( nxt ) {
+        this.play( nxt.id );
+    }
+    else {
+        manual ? this.play( this.playlist.list[0].id ) : '';
+    }
+
     return this;
 };
 
