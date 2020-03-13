@@ -25,7 +25,7 @@ function JAudioPlayer(JAudio) {
                     '</div>' +
                     '<div class="infos">' +
                         '<span class="title">'+ song.name +'</span>' +
-                        '<span class="album">Album name - 2001</span>' +
+                        '<span class="album"> --- </span>' +
                     '</div>' +
                 '</div>';
     };
@@ -127,8 +127,16 @@ function JAudioPlayer(JAudio) {
         // load meta song data
         jsmediatags.read(song.source, {
             onSuccess: function(datas) {
-                console.log(datas);
                 songelt.querySelector('.infos .album').textContent = [ datas.tags.artist, datas.tags.title ].join(' - ');
+
+                // parse the file
+                var blob = new Blob(datas.tags.picture.data, {
+                    type: datas.tags.picture.format
+                });
+
+                var img = URL.createObjectURL(blob);
+
+                document.querySelector('.jAudio .player').style.backgroundImage = 'url('+ img +')';
             },
             onError: function(error) {
                 console.log(error);
