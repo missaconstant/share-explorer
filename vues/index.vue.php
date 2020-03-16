@@ -60,7 +60,7 @@
                                 <a class="dropdown-item" href="#" @click="create('folder', 'dossier')"><i class="icon ion-md-folder"></i> Nouveau Dossier</a>
                             </div>
                         </li>
-                        <li @click="JAudio.togglePlay()">
+                        <li @click="">
                             <a href="#!"><i class="icon ion-md-settings"></i></a>
                         </li>
                         <li class="tobottom">
@@ -105,7 +105,7 @@
                             </div>
                             <!--  -->
                             <div class="searchbar" v-bind:class="{ 'shown': settings.searchbar.shown }">
-                                <input type="text" @keyup="filterFile" placeholder="Que cherchez vous ?" id="se_searchbar">
+                                <input type="text" @keyup="filterFile" placeholder="Que cherchez vous ?" id="se_searchbar" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -294,7 +294,7 @@
         <script src="<?= framer\Statics::$THEME ?>assets/js/videojs/jVideo.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/view.js" charset="utf-8"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.3/jsmediatags.min.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/jsmediatags.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio-Player.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/vue.dev.js" charset="utf-8"></script>

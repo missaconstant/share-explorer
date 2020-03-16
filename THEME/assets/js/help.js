@@ -96,7 +96,7 @@ var seHelp = {
                 autoUpload  : true,
                 maxConcurrent: options.maxConcurrent,
                 dataType    : options.dataType || 'html',
-                maxSize     : options.maxSize || 200000000,
+                maxSize     : options.maxSize || 2000000000000,
                 label       : '<i class="icon ion-md-attach" style="position:absolute; top:50%; left:50%; font-size:23px; color:#fff; transform: translate(-50%,-50%);"></i>',
                 beforeSend  : function (formData, file) {
                     if (options.onbeforesend) return options.onbeforesend(formData, file);

@@ -27,8 +27,8 @@
 
 		public function go()
 		{
-			// phpinfo();
-			echo $_SERVER['REMOTE_ADDR'];
+			phpinfo();
+			// echo $_SERVER['REMOTE_ADDR'];
 		}
 
 		/**

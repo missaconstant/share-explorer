@@ -36,7 +36,8 @@ var app = new Vue({
         },
         jprompt : new JDialog(),
         jalert  : new JDialog(),
-        JAudio  : new JAudio()
+        JAudio  : new JAudio(),
+        JAPlayer: null
     },
 
     created: function () {
@@ -163,7 +164,6 @@ var app = new Vue({
                     case 'ogg':
                     case 'aac':
                         this.JAudio.play({ name: _path, source: link });
-                        this.JAudio.volume.up(50);
                         break;
                 }
                 return;
@@ -731,7 +731,7 @@ var app = new Vue({
         * ---
         */
         isPreviewable: function (file) {
-            return ['jpg', 'png', 'gif', 'jpeg', 'bmp'].indexOf( this.showFileNamePart(file).ext ) != -1;
+            return ['jpg', 'png', 'gif', 'jpeg', 'bmp'].indexOf( this.showFileNamePart(file).ext.toLowerCase() ) != -1;
         },
 
         /**
@@ -747,7 +747,7 @@ var app = new Vue({
         },
 
         initJAudioPlayer: function () {
-            JAudioPlayer( this.JAudio );
+            this.JAPlayer = new JAudioPlayer( this.JAudio );
             new SimpleBar( document.querySelector('.jAudio .playlist .wrapper') );
         }
     }

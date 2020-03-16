@@ -18,7 +18,7 @@ function JAudioPlayer(JAudio) {
     // template
     var songtemplate = function (song) {
         return  '' +
-                '<div class="song" id="JA-play-'+ song.id +'">' +
+                // '<div class="song" id="JA-play-'+ song.id +'">' +
                     '<div class="thumb">' +
                         '<i class="icon ion-ios-play ispaused"></i>' +
                         '<i class="icon ion-md-stats isplaying"></i>' +
@@ -26,8 +26,8 @@ function JAudioPlayer(JAudio) {
                     '<div class="infos">' +
                         '<span class="title">'+ song.name +'</span>' +
                         '<span class="album"> --- </span>' +
-                    '</div>' +
-                '</div>';
+                    '</div>';
+                // '</div>';
     };
 
     // helper: __playbtntoggle()
@@ -56,6 +56,12 @@ function JAudioPlayer(JAudio) {
     // handle next btn click
     _forw_btn.addEventListener('click', function (e) {
         JAudio.next(true);
+    });
+
+    // handle close btn click
+    _closebtn.addEventListener('click', function (e) {
+        _container.classList.remove('shown');
+        JAudio.stop();
     });
 
     // handle metadata loaded
@@ -119,10 +125,14 @@ function JAudioPlayer(JAudio) {
 
     // handle song adding to playlist
     JAudio.on('songadd', function (song) {
-        var template = songtemplate( song );
-        _playlist.innerHTML += template;
+        var template    = songtemplate( song );
+        var songelt     = document.createElement('div');
 
-        var songelt = _playlist.querySelector('#JA-play-' + song.id);
+        songelt.className    = 'song';
+        songelt.id           = 'JA-play-' + song.id;
+        songelt.innerHTML    = template;
+
+        _playlist.appendChild(songelt);
 
         // load meta song data
         jsmediatags.read(song.source, {
@@ -130,13 +140,18 @@ function JAudioPlayer(JAudio) {
                 songelt.querySelector('.infos .album').textContent = [ datas.tags.artist, datas.tags.title ].join(' - ');
 
                 // parse the file
-                var blob = new Blob(datas.tags.picture.data, {
-                    type: datas.tags.picture.format
-                });
-
-                var img = URL.createObjectURL(blob);
-
-                document.querySelector('.jAudio .player').style.backgroundImage = 'url('+ img +')';
+                // if ( datas.tags.picture ) {
+                //     var blob = new Blob([datas.tags.picture.data], {
+                //         type: datas.tags.picture.format
+                //     });
+                //
+                //     var fr = new FileReader();
+                //         fr.onload = function () {
+                //             // document.querySelector('.jAudio .player').style.backgroundImage = 'url('+ fr.result +')';
+                //             document.querySelectorAll('.files-folders .item img')[0].src = fr.result;
+                //         };
+                //         fr.readAsDataURL(blob);
+                // }
             },
             onError: function(error) {
                 console.log(error);
@@ -144,7 +159,7 @@ function JAudioPlayer(JAudio) {
         });
 
         // bind click event
-        songelt.onclick = function () {
+        songelt.addEventListener('click', function (e) {
             var thesong = this.id.split('JA-play-')[1];
 
             if ( this.classList.contains('playing') ) {
@@ -155,12 +170,19 @@ function JAudioPlayer(JAudio) {
                     JAudio.play();
                 }
                 else {
-                    alert('play');
                     JAudio.play(song.id);
                 }
             }
 
             __playbtntoggle();
-        };
+        });
+
+        // open visual player
+        _container.classList.add('shown');
     });
 }
+
+JAudioPlayer.prototype.toggle = function () {
+    var el = document.querySelector('.jAudio');
+        el.classList[ el.classList.contains('shown') ? 'remove':'add' ]('shown');
+};
