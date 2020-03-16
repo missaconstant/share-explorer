@@ -749,6 +749,10 @@ var app = new Vue({
         initJAudioPlayer: function () {
             this.JAPlayer = new JAudioPlayer( this.JAudio );
             new SimpleBar( document.querySelector('.jAudio .playlist .wrapper') );
+        },
+
+        toggleAudioPlay: function () {
+            this.JAPlayer.toggle();
         }
     }
 
