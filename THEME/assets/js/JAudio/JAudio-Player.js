@@ -95,6 +95,13 @@ function JAudioPlayer(JAudio) {
         }
     });
 
+    // handle song end
+    JAudio.on('end', function (song) {
+        if ( song ) {
+            _playlist.querySelector('#JA-play-' + song.id).classList.remove('playing');
+        }
+    });
+
     // handle error
     JAudio.on('error', function () {
         JAudio.stop();
