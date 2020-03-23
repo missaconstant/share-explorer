@@ -157,7 +157,7 @@ var app = new Vue({
                         break;
 
                     case 'pdf':
-                        window.open(link);
+                        pdfobject.open(link);
                         break;
 
                     case 'mp3':
@@ -187,6 +187,10 @@ var app = new Vue({
                 }
             }
 
+            // show loadeer
+            seHelp.loader.show("Patientez un instant ...");
+
+            // query
             $.ajax({
                 url     : self.api + '/get-path-files',
                 method  : 'post',
@@ -226,6 +230,9 @@ var app = new Vue({
             .always(function () {
                 // release watching state
                 self.settings.watching.state = false;
+
+                // hide loader
+                seHelp.loader.hide();
             });
         },
 

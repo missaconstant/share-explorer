@@ -195,6 +195,14 @@ JAudio.prototype.init = function () {
 };
 
 /**
+* @method getAUdioElement
+* get JAudio instance
+*/
+JAudio.prototype.getAudioElement = function () {
+    return this.__instance;
+};
+
+/**
 * @method on
 * play a song
 */

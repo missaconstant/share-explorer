@@ -287,9 +287,11 @@
         <script src="<?= framer\Statics::$THEME ?>assets/js/videojs/jVideo.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/viewer.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/viewer/view.js" charset="utf-8"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.3/jsmediatags.min.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/jsmediatags.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/JAudio/JAudio-Player.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/pdfobject/pdfobject.min.js" charset="utf-8"></script>
+        <script src="<?= framer\Statics::$THEME ?>assets/js/pdfobject/PDFObject.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/vue.dev.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/core.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/js/formstone/dist/js/upload.js" charset="utf-8"></script>

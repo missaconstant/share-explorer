@@ -14,6 +14,7 @@ function JAudioPlayer(JAudio) {
     var _playlist   = _container.querySelector('.playlist .wrapper .simplebar-content');
     var _closebtn   = _container.querySelector('.closer');
     var _progress   = _container.querySelector('.bar');
+    var _thebar     = _container.querySelector('.play-progress');
 
     // template
     var songtemplate = function (song) {
@@ -56,6 +57,34 @@ function JAudioPlayer(JAudio) {
     // handle next btn click
     _forw_btn.addEventListener('click', function (e) {
         JAudio.next(true);
+    });
+
+    // handle progress bar click
+    _thebar.addEventListener('mouseup', function (e) {
+        // get mouse offset position
+        var mousePos = {
+            x: e.pageX || (e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft),
+            y: e.pageY || (e.clientY + document.body.scrollTop + document.documentElement.scrollTop)
+        };
+
+        // get _thebar offset position
+        // function from openclassrooms js course
+        var thebarPos = (function (element) {
+            var top = 0, left = 0;
+            while (element) {
+                left += element.offsetLeft;
+                top += element.offsetTop;
+                element = element.offsetParent;
+            }
+            return { x: left, y: top };
+        })(this);
+
+        var target = mousePos.x - thebarPos.x;
+        var baroff = this.offsetWidth;
+        var percnt = Math.floor((target / baroff) * 100);
+        var duratn = JAudio.time().duration;
+
+        JAudio.getAudioElement().currentTime = (duratn * percnt) / 100;
     });
 
     // handle close btn click
