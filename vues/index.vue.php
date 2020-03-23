@@ -227,6 +227,7 @@
         <!-- Video Player -->
         <div class="jVideo">
             <div class="overlay"></div>
+            <span class="closer">&times;</span>
             <div class="player-box">
                 <!--  -->
             </div>

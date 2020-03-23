@@ -23,7 +23,7 @@ var app = new Vue({
         barpath : './',
         homedir : './',
         pos     : 'Partage',
-        api     : 'http://192.168.8.106:6100',
+        api     : '',
         dirs    : [],
         dirs_   : [],
         stack   : { prev: [], next: [] },
