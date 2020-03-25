@@ -200,6 +200,20 @@ var app = new Vue({
                 dataType: 'json'
             })
             .done(function (response) {
+                // on server refused
+                if (response.error) {
+                    // show alert
+                    self.jalert.show({
+                        title: 'Erreur',
+                        message: response.message,
+                        okBtnText: 'OK'
+                    });
+
+                    // set old path as default
+                    self.path = oldpath;
+                    return;
+                }
+
                 // update dirs
                 self.dirs   = response.message.dirs;
                 self.filterFile();

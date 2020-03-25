@@ -52,9 +52,21 @@
 		{
 			$path 	= $paths ?? Posts::post('path');
 			$path	= strlen( trim($path) ) ? $path.'/' : './';
+			$path 	= str_replace('//', '/', $path);
 			$list 	= [];
-			$dir	= opendir( $path );
+			$config	= json_decode( file_get_contents(__DIR__ . '/../share.config.json') );
 
+			// is user allowed to see this ?
+			if ( strpos( $path, $config->homedir ) === false )
+			{
+				$this->json_error("Accès non autorisé. Restez chez vous !");
+				exit();
+			}
+
+			// then open directory
+			$dir = opendir( $path );
+
+			// and load all files and directories on
 			while ( $file = readdir( $dir ) )
 			{
 				if ( ! in_array($file, [ '.', '..' ]) )
@@ -68,6 +80,7 @@
 				}
 			}
 
+			// then close directory
 			closedir( $dir );
 
 			if ( $paths )
@@ -76,6 +89,7 @@
 			}
 			else {
 				$this->json_success([ "dirs" => $list ]);
+				exit();
 			}
 		}
 
@@ -111,6 +125,7 @@
 				"cause"	=> $emsg,
 				"file"	=> [ "filename" => $file['name'], "isfile" => true ]
 			]);
+			exit();
 		}
 
 		/**
@@ -220,6 +235,7 @@
 				"moved"	=> $answ,
 				"dirs"	=> $this->getPathFiles( $path )
 			]);
+			exit();
 		}
 
 		/**
@@ -251,6 +267,7 @@
 				"removed"	=> $answ,
 				"dirs"		=> $this->getPathFiles( $path )
 			]);
+			exit();
 		}
 
 		/**
@@ -276,6 +293,7 @@
 				"renamed"	=> $answ,
 				"dirs"		=> $this->getPathFiles( $path )
 			]);
+			exit();
 		}
 
 		/**
@@ -302,6 +320,7 @@
 				"moveorcopy"=> true,
 				"dirs"		=> $this->getPathFiles( $path )
 			]);
+			exit();
 		}
 
 		/**
