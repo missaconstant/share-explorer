@@ -280,6 +280,9 @@
             <img src="" alt="" id="picviewer" class="d-none">
         </div>
 
+        <!-- routes -->
+        <input type="hidden" id="theme_url" value="<?= framer\Statics::$THEME ?>" />
+
         <!-- scripts -->
         <script src="<?= framer\Statics::$THEME ?>assets/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
         <script src="<?= framer\Statics::$THEME ?>assets/bower_components/bootstrap/dist/js/bootstrap.bundle.min.js" charset="utf-8"></script>

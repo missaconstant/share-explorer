@@ -25,6 +25,15 @@
 			$this->render('index');
 		}
 
+		/**
+		* @method admin
+		* @return view
+		*/
+		public function admin()
+		{
+			$this->render('admin');
+		}
+
 		public function go()
 		{
 			phpinfo();

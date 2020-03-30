@@ -2,7 +2,9 @@ var pdfobject = {
 
     inited: false,
 
-    init: function () {
+    wrap  : null,
+
+    init: function (url) {
         var self = this;
 
         if ( this.inited ) return;
@@ -18,9 +20,15 @@ var pdfobject = {
             element.style.zIndex    = 7;
             element.style.background= 'rgba(0, 0, 0, 0.5)';
 
-        // adding pdf body
-        element.innerHTML = '<div id="pdf-object-wrap" style="position:absolute;top:0;bottom:0;left:0;right:0;">' +
-                            '</div>';
+        // adding pdf iframe body
+        // element.innerHTML = '<div id="pdf-object-wrap" style="position:absolute;top:0;bottom:0;left:0;right:0;">' +
+        //                     '</div>';
+        var frame = document.createElement('IFRAME');
+            frame.src       = document.getElementById('theme_url').value + 'assets/js/doc-viewer/index.html#' + url;
+            frame.style.position = "absolute";
+            frame.style.top     = "0";
+            frame.style.left    = "0";
+            frame.style.zIndex  = 7;
 
         // close element
         var closebtn = document.createElement('span');
@@ -46,18 +54,20 @@ var pdfobject = {
                 self.inited = false;
             };
 
+        element.appendChild( frame );
         element.appendChild( closebtn );
         document.body.appendChild( element );
+
+        // set frame height
+        frame.height = element.offsetHeight;
+        frame.width  = element.offsetWidth;
 
         this.inited = true;
     },
 
     open: function (url) {
         // init the thing
-        this.init();
-
-        // then trigger PDF
-        PDFObject.embed(url, "#pdf-object-wrap");
+        this.init(url);
     },
 
 };

@@ -105,6 +105,12 @@ div.main .app .main-content {
   padding-top: 80px;
   position: relative; }
 
+div.main .app .main-content.no-toppadding {
+  padding-top: 0; }
+
+div.main .app .main-content.allow-scrolling {
+  overflow-y: auto; }
+
 div.main .app .main-content .topbar {
   position: fixed;
   width: 100%;
@@ -295,6 +301,44 @@ div.main .app .main-content .current-dir.show-fst-trigger .fs-upload-target {
 div.main .app .main-content .current-dir .fs-upload-input {
   height: 0;
   width: 0; }
+
+div.main .app .main-content .admin-header {
+  padding: 25px;
+  padding-bottom: 0; }
+
+div.main .app .main-content .admin-header .tiny-toggle {
+  font-size: 21px;
+  display: inline-block;
+  color: #444;
+  margin-right: 15px; }
+
+div.main .app .main-content .admin-header .admin-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 0; }
+
+div.main .app .main-content .admin-counts {
+  margin-top: 40px; }
+
+div.main .app .main-content .admin-counts .count {
+  background: #fff;
+  box-shadow: 1px 3px 30px rgba(0, 0, 0, 0.1); }
+
+div.main .app .main-content .admin-counts .count .ico {
+  font-size: 3em;
+  color: #ffdba0; }
+
+div.main .app .main-content .admin-counts .count .infos h4 {
+  font-size: 15px;
+  font-weight: bold;
+  color: #999;
+  margin: 0; }
+
+div.main .app .main-content .admin-counts .count .infos span {
+  font-size: 27px;
+  font-weight: bold;
+  color: #333; }
 
 div.main .dropzone {
   position: absolute;

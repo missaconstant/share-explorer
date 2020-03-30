@@ -157,6 +157,7 @@ var app = new Vue({
                         break;
 
                     case 'pdf':
+                    case 'txt':
                         pdfobject.open(link);
                         break;
 

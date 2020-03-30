@@ -118,6 +118,14 @@ div.main {
             padding-top: 80px;
             position: relative;
 
+            &.no-toppadding {
+                padding-top: 0;
+            }
+
+            &.allow-scrolling {
+                overflow-y: auto;
+            }
+
             .topbar {
                 position: fixed;
                 width: 100%;
@@ -362,6 +370,55 @@ div.main {
                 .fs-upload-input {
                     height: 0;
                     width: 0;
+                }
+            }
+
+            // admin-feature
+            .admin-header {
+                padding: 25px;
+                padding-bottom: 0;
+
+                .tiny-toggle {
+                    font-size: 21px;
+                    display: inline-block;
+                    color: #444;
+                    margin-right: 15px;
+                }
+
+                .admin-title {
+                    font-size: 1.5em;
+                    font-weight: bold;
+                    display: inline-block;
+                    margin-bottom: 0;
+                }
+            }
+
+            .admin-counts {
+                margin-top: 40px;
+
+                .count {
+                    background: #fff;
+                    box-shadow: 1px 3px 30px rgba(#000, 0.1);
+
+                    .ico {
+                        font-size: 3em;
+                        color: #ffdba0;
+                    }
+
+                    .infos {
+                        h4 {
+                            font-size: 15px;
+                            font-weight: bold;
+                            color: #999;
+                            margin: 0;
+                        }
+
+                        span {
+                            font-size: 27px;
+                            font-weight: bold;
+                            color: #333;
+                        }
+                    }
                 }
             }
         }
