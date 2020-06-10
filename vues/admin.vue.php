@@ -53,18 +53,18 @@
                 <div class="main-content no-toppadding allow-scrolling clearfix">
                     <!-- header -->
                     <div class="admin-header">
-                        <a href="#" class="tiny-toggle" @click="toggleTinySidebar">
+                        <a href="#" class="tiny-toggle d-sm-block d-md-none" @click="toggleTinySidebar">
                             <i class="icon ion-md-menu"></i>
                         </a>
                         <!--  -->
-                        <h2 class="admin-title">Accueil</h2>
+                        <h2 class="admin-title">Tableau de bord</h2>
                     </div>
 
                     <!-- Counts boxes -->
                     <div class="admin-counts px-sm-4">
-                        <div class="container-fluid">
+                        <div class="container-fluid shadow-sm" style="background: #fff;">
                             <div class="row">
-                                <div class="col-sm-3 mb-4">
+                                <div class="col-sm-3">
                                     <div class="count px-4 py-4">
                                         <div class="row align-items-center">
                                             <div class="col-auto mr-auto infos">
@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3 mb-4">
+                                <div class="col-sm-3">
                                     <div class="count px-4 py-4">
                                         <div class="row align-items-center">
                                             <div class="col-auto mr-auto infos">
@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3 mb-4">
+                                <div class="col-sm-3">
                                     <div class="count px-4 py-4">
                                         <div class="row align-items-center">
                                             <div class="col-auto mr-auto infos">
@@ -103,7 +103,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3 mb-4">
+                                <div class="col-sm-3">
                                     <div class="count px-4 py-4">
                                         <div class="row align-items-center">
                                             <div class="col-auto mr-auto infos">
@@ -118,6 +118,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Groups and logs -->
+                    <div class="groups-logs">
+
                     </div>
                 </div>
 

@@ -21,14 +21,16 @@ jVideo.init = function() {
     // init defaults
     this.el         = document.querySelector('.jVideo');
     this.overlay    = document.querySelector('.jVideo .overlay');
+    this.closer     = document.querySelector('.jVideo .closer');
     this.video      = this.el.querySelector('#jVideo-player');
 
     // binds
     this.overlay.addEventListener('click', function () {
-        self.el.style.display = 'none';
-        self.vjs.dispose();
+        self.kill();
+    });
 
-        self.inited = false;
+    this.closer.addEventListener('click', function () {
+        self.kill();
     });
 
     this.video.addEventListener('contextmenu', function (e) {
@@ -67,3 +69,14 @@ jVideo.play = function (src) {
 
     });
 };
+
+/**
+* @method kill
+* ---
+*/
+jVideo.kill = function () {
+    this.el.style.display = 'none';
+    this.vjs.dispose();
+
+    this.inited = false;
+}
